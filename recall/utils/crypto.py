@@ -1,3 +1,4 @@
+# This file contains cryptographic utility functions
 from typing import Dict, Any
 from web3 import Web3
 
@@ -5,12 +6,19 @@ def sign_message(private_key: str, message: str) -> Dict[str, Any]:
     """
     Sign a message with a private key.
     
+    This function uses Web3 to create an Ethereum signature.
+    The signature proves ownership of the private key without revealing it.
+    
     Args:
         private_key: Ethereum private key
         message: Message to sign
         
     Returns:
-        Dictionary with signature details
+        Dictionary with signature details including:
+        - message: The original message
+        - messageHash: Hash of the message
+        - signature: The full signature
+        - r, s, v: Components of the signature
     """
     web3 = Web3()
     signed_message = web3.eth.account.sign_message(
